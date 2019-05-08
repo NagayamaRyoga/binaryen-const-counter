@@ -1,6 +1,7 @@
 #include <cstdlib>
-
 #include <iostream>
+
+#include <wasm-io.h>
 
 int main(int argc, char *argv[]) {
     try {
@@ -9,12 +10,12 @@ int main(int argc, char *argv[]) {
             return EXIT_FAILURE;
         }
 
-        std::cout << "Hello, world" << std::endl;
-    } catch (const std::exception &e) {
-        std::cerr << e.what() << std::endl;
-        return EXIT_FAILURE;
-    } catch (...) {
-        std::cerr << "unknown exception" << std::endl;
+        // Read WebAssembly Module
+        wasm::Module module;
+        wasm::ModuleReader{}.read(argv[1], module);
+    } catch (const wasm::ParseException &e) {
+        e.dump(std::cerr);
+
         return EXIT_FAILURE;
     }
 }
