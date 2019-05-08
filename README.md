@@ -1,5 +1,7 @@
 # Binaryen Const Instruction Counter
 
+Example of Writing WebAssembly Passes using Binaryen
+
 https://nagayamaryoga.github.io/posts/
 
 ## How to Checkout
