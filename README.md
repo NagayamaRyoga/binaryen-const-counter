@@ -2,7 +2,7 @@
 
 Example of Writing WebAssembly Passes using Binaryen
 
-https://nagayamaryoga.github.io/posts/
+https://nagayamaryoga.github.io/posts/2019-05-08-writing-wasm-passes
 
 ## How to Checkout
 
