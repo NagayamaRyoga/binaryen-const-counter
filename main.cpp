@@ -173,7 +173,11 @@ struct CountingVisitor : public wasm::OverriddenVisitor<CountingVisitor, int> {
         WASM_UNREACHABLE();
     }
     int visitFunction([[maybe_unused]] wasm::Function *curr) {
-        WASM_UNREACHABLE();
+        if (curr->body == nullptr) {
+            return 0;
+        }
+
+        return visit(curr->body);
     }
     int visitTable([[maybe_unused]] wasm::Table *curr) {
         WASM_UNREACHABLE();
@@ -198,7 +202,7 @@ public:
         int count = 0;
 
         for (const auto &function : module->functions) {
-            count += visitor.visit(function->body);
+            count += visitor.visitFunction(function.get());
         }
 
         std::cout << count << " const instruction(s)" << std::endl;
